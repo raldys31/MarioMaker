@@ -63,6 +63,10 @@ public class Images {
     public static BufferedImage boundBlock;
     public static BufferedImage mushroom;
     public static BufferedImage goombaDies;
+    public static BufferedImage tileBlock;
+    public static BufferedImage iceBlock;
+    public static BufferedImage blueBlock;
+    public static BufferedImage novaBlock;
 
     private SpriteSheet mainmenuSpriteSheet;
     private SpriteSheet backgroundSpriteSheet;
@@ -299,6 +303,10 @@ public class Images {
             surfaceBlock = interactableSpriteSheet.crop(112,93,16,16);
             //breakBlock = blockSpriteSheet.crop(272,112,16,16);
             breakBlock = ImageIO.read(getClass().getResourceAsStream("/Sheets/brick.png"));
+            tileBlock = ImageIO.read(getClass().getResourceAsStream("/Sheets/tileblock.jpg"));
+            novaBlock = ImageIO.read(getClass().getResourceAsStream("/Sheets/novaBlock.png"));
+            iceBlock = ImageIO.read(getClass().getResourceAsStream("/Sheets/iceBlock.png"));
+            blueBlock = ImageIO.read(getClass().getResourceAsStream("/Sheets/blueBlock.jpg"));
 
             //items
             mushroom = interactableSpriteSheet.crop(112,34,16,16);

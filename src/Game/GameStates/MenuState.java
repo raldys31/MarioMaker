@@ -220,6 +220,22 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.goomba;
 		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_8)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.38039f,0.12157f,0.03529f), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.tileBlock;
+		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_9)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0,0.94118f,1), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.iceBlock;
+		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_F7)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0.40392f,0.56078f,1), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.blueBlock;
+		}
+		
 
 		if(mouseManager.isLeftPressed() && !clicked){
 			int posX =mouseManager.getMouseX()/GridPixelsize;
@@ -254,7 +270,10 @@ public class MenuState extends State {
 					"4 -> Surface Block (Orange)\n" +
 					"5 -> Bounds Block (Black)\n" +
 					"6 -> Mushroom (Purple)\n" +
-					"7 -> Goomba (Brown)");
+					"7 -> Goomba (Brown)\n" +
+					"8 -> Tile Block (Dark Brown)\n" +
+					"9 -> Ice Block (Aqua)\n" +
+					"F7 -> Blue Block (Sky Blue)");
 		}
 	}
 	public UIAnimationButton getBut() {

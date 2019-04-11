@@ -21,6 +21,9 @@ public class MapBuilder {
 	public static int misteryBlock = new Color(255,216,0).getRGB();
 	public static int mushroom = new Color(178,0,255).getRGB();
 	public static int goomba = new Color(167,15,1).getRGB();
+	public static int tileBlock = new Color(97,31,9).getRGB();
+	public static int iceBlock = new Color(0,240,255).getRGB();
+	public static int blueBlock = new Color(103,143,253).getRGB();
 	public static boolean mapDone = false;
 
 	public static Map createMap(BufferedImage mapImage, Handler handler){
@@ -45,6 +48,15 @@ public class MapBuilder {
 				}else if(currentPixel == misteryBlock){
 					BaseStaticEntity MisteryBlock = new MisteryBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(MisteryBlock);
+				}else if(currentPixel == tileBlock){
+					BaseStaticEntity TileBlock = new MisteryBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addBlock(TileBlock);
+				}else if(currentPixel == iceBlock){
+					BaseStaticEntity IceBlock = new MisteryBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addBlock(IceBlock);
+				}else if(currentPixel == blueBlock){
+					BaseStaticEntity BlueBlock = new MisteryBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addBlock(BlueBlock);
 				}else if(currentPixel == mushroom){
 					BaseDynamicEntity Mushroom = new Mushroom(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addEnemy(Mushroom);
