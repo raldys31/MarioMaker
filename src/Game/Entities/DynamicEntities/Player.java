@@ -2,6 +2,8 @@ package Game.Entities.DynamicEntities;
 
 import Game.Entities.EntityBase;
 import Game.Entities.StaticEntities.BaseStaticEntity;
+import Game.Entities.StaticEntities.BoundBlock;
+import Game.GameStates.State;
 import Main.Handler;
 import Resources.Animation;
 
@@ -45,6 +47,8 @@ public class Player extends BaseDynamicEntity {
         checkMarioHorizontalCollision();
         checkTopCollisions();
         checkItemCollision();
+        enemyCollision();
+        boundBricksColl();
         if(!isBig) {
             if (facing.equals("Left") && moving) {
                 playerSmallLeftAnimation.tick();
@@ -156,6 +160,57 @@ public class Player extends BaseDynamicEntity {
             }
         }
 
+        if(marioDies) {
+            handler.getMap().reset();
+        }
+    }
+    
+  //Check if Mario intersects with enemy, if it does, Mario dies.
+    public void enemyCollision() {
+    	boolean marioDies = false;
+    	Player mario = this;
+    	ArrayList<BaseDynamicEntity> enemies = handler.getMap().getEnemiesOnMap();
+    	
+    	boolean toRight = moving && facing.equals("Right");
+        boolean toLeft = moving && facing.equals("Left");
+        
+        Rectangle marioBoundsR = toRight ? mario.getRightBounds() : mario.getLeftBounds();
+        Rectangle marioBoundsL = toLeft ? mario.getLeftBounds() : mario.getRightBounds();
+        
+        for(BaseDynamicEntity enemy : enemies){
+            Rectangle enemyBoundsR = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
+            Rectangle enemyBoundsL = !toLeft ? enemy.getLeftBounds() : enemy.getRightBounds();
+            
+            if (marioBoundsR.intersects(enemyBoundsR) || marioBoundsL.intersects(enemyBoundsL) ) {
+                marioDies = true;
+                State.setState(handler.getGame().gameOverState);
+                break;
+            }
+        }
+        
+        if(marioDies) {
+            handler.getMap().reset();
+        }
+        
+    }
+
+//Checks if Mario touches bound bricks
+    public void boundBricksColl() {
+    	Player mario = this;
+    	boolean marioDies = false;
+        ArrayList<BaseStaticEntity> bricks = handler.getMap().getBlocksOnMap();
+        
+        Rectangle marioBounds = mario.getBounds();
+
+        for (BaseStaticEntity brick : bricks) {
+            Rectangle brickTopBounds = brick.getTopBounds();
+            if (marioBounds.intersects(brickTopBounds) && brick instanceof BoundBlock) {
+            	marioDies = true;
+                State.setState(handler.getGame().gameOverState);
+                break;
+            }
+        }
+        
         if(marioDies) {
             handler.getMap().reset();
         }

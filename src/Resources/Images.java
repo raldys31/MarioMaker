@@ -54,6 +54,7 @@ public class Images {
     public static BufferedImage title;
     public static BufferedImage Pause;
     public static BufferedImage Cursor;
+    public static BufferedImage GameOver;
 
     public static BufferedImage testMap;
     public static BufferedImage testMaptwo;
@@ -133,6 +134,8 @@ public class Images {
             butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//normbut
             butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//hoverbut
             butstart[2]= ImageIO.read(getClass().getResourceAsStream("/Buttons/ClickedBut.png"));//clickbut
+            GameOver = ImageIO.read(getClass().getResourceAsStream("/Sheets/gameOver.png"));
+
 
             backgrounds[0] = backgroundSpriteSheet.crop(2,2,512,432);
             backgrounds[1] = backgroundSpriteSheet.crop(516,2,512,432);
