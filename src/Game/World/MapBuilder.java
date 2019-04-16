@@ -4,6 +4,7 @@ import Game.Entities.DynamicEntities.BaseDynamicEntity;
 import Game.Entities.DynamicEntities.Goomba;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Mushroom;
+import Game.Entities.DynamicEntities.Pumpkin;
 import Game.Entities.StaticEntities.*;
 import Main.Handler;
 import Resources.Images;
@@ -21,6 +22,7 @@ public class MapBuilder {
 	public static int misteryBlock = new Color(255,216,0).getRGB();
 	public static int mushroom = new Color(178,0,255).getRGB();
 	public static int goomba = new Color(167,15,1).getRGB();
+	public static int pumpkin = new Color(255,70,0).getRGB();
 	public static int tileBlock = new Color(97,31,9).getRGB();
 	public static int iceBlock = new Color(0,240,255).getRGB();
 	public static int blueBlock = new Color(103,143,253).getRGB();
@@ -49,13 +51,13 @@ public class MapBuilder {
 					BaseStaticEntity MisteryBlock = new MisteryBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(MisteryBlock);
 				}else if(currentPixel == tileBlock){
-					BaseStaticEntity TileBlock = new MisteryBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					BaseStaticEntity TileBlock = new TileBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(TileBlock);
 				}else if(currentPixel == iceBlock){
-					BaseStaticEntity IceBlock = new MisteryBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					BaseStaticEntity IceBlock = new IceBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(IceBlock);
 				}else if(currentPixel == blueBlock){
-					BaseStaticEntity BlueBlock = new MisteryBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					BaseStaticEntity BlueBlock = new BlueBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(BlueBlock);
 				}else if(currentPixel == mushroom){
 					BaseDynamicEntity Mushroom = new Mushroom(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
@@ -63,6 +65,9 @@ public class MapBuilder {
 				}else if(currentPixel == goomba){
 					BaseDynamicEntity Goomba = new Goomba(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addEnemy(Goomba);
+				}else if(currentPixel == pumpkin){
+					BaseDynamicEntity Pumpkin = new Pumpkin(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addEnemy(Pumpkin);
 				}
 			}
 

@@ -48,6 +48,7 @@ public class Images {
 
 
     public static BufferedImage[] goomba;
+    public static BufferedImage[] pumpkin;
 
 
     public static BufferedImage title;
@@ -63,6 +64,7 @@ public class Images {
     public static BufferedImage boundBlock;
     public static BufferedImage mushroom;
     public static BufferedImage goombaDies;
+    public static BufferedImage pumpkinDies;
     public static BufferedImage tileBlock;
     public static BufferedImage iceBlock;
     public static BufferedImage blueBlock;
@@ -76,6 +78,7 @@ public class Images {
     private SpriteSheet goombaSpriteSheet;
     private SpriteSheet SSpriteSheet;
     private SpriteSheet SAttackSpriteSheet;
+    private SpriteSheet enemySpriteSheet;
 
     public Images() {
 
@@ -104,6 +107,7 @@ public class Images {
         marioBigJumpLeft = new BufferedImage[5];
         marioBigJumpRight = new BufferedImage[5];
         goomba = new BufferedImage[2];
+        pumpkin = new BufferedImage[4];
 
 
 
@@ -119,6 +123,7 @@ public class Images {
             goombaSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/goombaSprite.png")));
             SSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/Sheets.png")));
             SAttackSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet2.png")));
+            enemySpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet.png")));
 
 
             //Images
@@ -315,6 +320,12 @@ public class Images {
             goomba[0]=goombaSpriteSheet.crop(119,40,162,162);
             goomba[1]= goombaSpriteSheet.crop(329,40,162,162);
             goombaDies=goombaSpriteSheet.crop(539,100,162,81);
+            
+            pumpkin[0]=enemySpriteSheet.crop(117,108,21,24);
+            pumpkin[1]= enemySpriteSheet.crop(138,107,19,24);
+            pumpkin[2]=enemySpriteSheet.crop(157,108,19,24);
+            pumpkin[3]= enemySpriteSheet.crop(176,108,19,24);
+          
 
 
         }catch (IOException e) {

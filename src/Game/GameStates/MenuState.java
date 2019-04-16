@@ -235,6 +235,11 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.blueBlock;
 		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,1,0.27843f,0), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.pumpkin;
+		}
 		
 
 		if(mouseManager.isLeftPressed() && !clicked){
@@ -273,7 +278,8 @@ public class MenuState extends State {
 					"7 -> Goomba (Brown)\n" +
 					"8 -> Tile Block (Dark Brown)\n" +
 					"9 -> Ice Block (Aqua)\n" +
-					"F7 -> Blue Block (Sky Blue)");
+					"F7 -> Blue Block (Sky Blue)\n" +
+					"P -> Pumpkin (Dark Orange)");
 		}
 	}
 	public UIAnimationButton getBut() {
