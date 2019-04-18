@@ -240,6 +240,11 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.pumpkin;
 		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,1,0.82352f,0), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.starcoin;
+		}
 		
 
 		if(mouseManager.isLeftPressed() && !clicked){
@@ -279,7 +284,9 @@ public class MenuState extends State {
 					"8 -> Tile Block (Dark Brown)\n" +
 					"9 -> Ice Block (Aqua)\n" +
 					"F7 -> Blue Block (Sky Blue)\n" +
-					"P -> Pumpkin (Dark Orange)");
+					"P -> Pumpkin (Dark Orange)\n" +
+					"S -> Star Coin (Gold)\n" +
+					"L -> Luigi (Green)");
 		}
 	}
 	public UIAnimationButton getBut() {

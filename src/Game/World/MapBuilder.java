@@ -5,6 +5,7 @@ import Game.Entities.DynamicEntities.Goomba;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Mushroom;
 import Game.Entities.DynamicEntities.Pumpkin;
+import Game.Entities.DynamicEntities.StarCoin;
 import Game.Entities.StaticEntities.*;
 import Main.Handler;
 import Resources.Images;
@@ -21,6 +22,7 @@ public class MapBuilder {
 	public static int breakBlock = new Color(0,38,255).getRGB();
 	public static int misteryBlock = new Color(255,216,0).getRGB();
 	public static int mushroom = new Color(178,0,255).getRGB();
+	public static int starcoin = new Color(255,210,0).getRGB();
 	public static int goomba = new Color(167,15,1).getRGB();
 	public static int pumpkin = new Color(255,70,0).getRGB();
 	public static int tileBlock = new Color(97,31,9).getRGB();
@@ -68,6 +70,9 @@ public class MapBuilder {
 				}else if(currentPixel == pumpkin){
 					BaseDynamicEntity Pumpkin = new Pumpkin(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addEnemy(Pumpkin);
+				}else if(currentPixel == starcoin){
+					BaseDynamicEntity StarCoin = new StarCoin(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addEnemy(StarCoin);
 				}
 			}
 

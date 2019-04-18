@@ -64,6 +64,7 @@ public class Images {
     public static BufferedImage surfaceBlock;
     public static BufferedImage boundBlock;
     public static BufferedImage mushroom;
+    public static BufferedImage starcoin;
     public static BufferedImage goombaDies;
     public static BufferedImage pumpkinDies;
     public static BufferedImage tileBlock;
@@ -80,6 +81,8 @@ public class Images {
     private SpriteSheet SSpriteSheet;
     private SpriteSheet SAttackSpriteSheet;
     private SpriteSheet enemySpriteSheet;
+    private SpriteSheet itemSpriteSheet;
+    
 
     public Images() {
 
@@ -125,6 +128,7 @@ public class Images {
             SSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/Sheets.png")));
             SAttackSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet2.png")));
             enemySpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet.png")));
+            itemSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/itemSprite.png")));
 
 
             //Images
@@ -318,6 +322,7 @@ public class Images {
 
             //items
             mushroom = interactableSpriteSheet.crop(112,34,16,16);
+            starcoin = itemSpriteSheet.crop(507, 427, 72, 70);
 
             //enemy
             goomba[0]=goombaSpriteSheet.crop(119,40,162,162);

@@ -3,6 +3,7 @@ package Game.Entities.DynamicEntities;
 import Game.Entities.EntityBase;
 import Game.Entities.StaticEntities.BaseStaticEntity;
 import Game.Entities.StaticEntities.BoundBlock;
+import Game.Entities.StaticEntities.TileBlock;
 import Game.GameStates.State;
 import Main.Handler;
 import Resources.Animation;
@@ -18,7 +19,7 @@ public class Player extends BaseDynamicEntity {
     public String facing = "Left";
     public boolean moving = false;
     public Animation playerSmallLeftAnimation,playerSmallRightAnimation,playerBigLeftWalkAnimation,playerBigRightWalkAnimation,playerBigLeftRunAnimation,playerBigRightRunAnimation;
-    public boolean falling = true, jumping = false,isBig=false,running = false,changeDirrection=false;
+    public boolean falling = true, jumping = false, isBig = false, gotStarCoin = false, running = false, changeDirrection = false;
     public double gravityAcc = 0.38;
     int changeDirectionCounter=0;
 
@@ -71,7 +72,7 @@ public class Player extends BaseDynamicEntity {
     private void checkItemCollision() {
 
         for (BaseDynamicEntity entity : handler.getMap().getEnemiesOnMap()) {
-            if (entity != null && getBounds().intersects(entity.getBounds()) && entity instanceof Item && !isBig) {
+            if (entity != null && getBounds().intersects(entity.getBounds()) && entity instanceof Mushroom && !isBig) {
                 isBig = true;
                 this.y -= 8;
                 this.height += 8;
@@ -79,9 +80,14 @@ public class Player extends BaseDynamicEntity {
                 ((Item) entity).used = true;
                 entity.y = -100000;
             }
+            else if (entity != null && getBounds().intersects(entity.getBounds()) && entity instanceof StarCoin && !gotStarCoin) {
+            	 gotStarCoin = true;
+                 ((Item) entity).used = true;
+                 System.out.println("Got Star Coin");
+                 //añadir codigo para el winstate
+            }
         }
     }
-
 
     public void checkBottomCollisions() {
         Player mario = this;
@@ -204,7 +210,7 @@ public class Player extends BaseDynamicEntity {
 
         for (BaseStaticEntity brick : bricks) {
             Rectangle brickTopBounds = brick.getTopBounds();
-            if (marioBounds.intersects(brickTopBounds) && brick instanceof BoundBlock) {
+            if (marioBounds.intersects(brickTopBounds) && brick instanceof BoundBlock || brick instanceof TileBlock) {
             	marioDies = true;
                 State.setState(handler.getGame().gameOverState);
                 break;
