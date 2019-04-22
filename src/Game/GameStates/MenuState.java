@@ -245,6 +245,11 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.starcoin;
 		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_L)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0,0.60784f,0), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.luigi;
+		}
 		
 
 		if(mouseManager.isLeftPressed() && !clicked){

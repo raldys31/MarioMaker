@@ -34,6 +34,18 @@ public class Images {
     public static BufferedImage[] marioBigJumpLeft;//also store ide sprites like looking up or down and left<->right transition
     public static BufferedImage[] marioBigJumpRight;
     
+    public static BufferedImage[] luigiSmallWalkLeft;
+    public static BufferedImage[] luigiSmallWalkRight;
+    public static BufferedImage[] luigiSmallJumpLeft;//also store ide sprites like looking up or down
+    public static BufferedImage[] luigiSmallJumpRight;
+
+    public static BufferedImage[] luigiBigWalkLeft;
+    public static BufferedImage[] luigiBigWalkRight;
+    public static BufferedImage[] luigiBigRunLeft;
+    public static BufferedImage[] luigiBigRunRight;
+    public static BufferedImage[] luigiBigJumpLeft;//also store ide sprites like looking up or down and left<->right transition
+    public static BufferedImage[] luigiBigJumpRight;
+    
     public static BufferedImage[] item;
     public static BufferedImage[] enemy;
     public static BufferedImage[] hitWall;
@@ -81,7 +93,9 @@ public class Images {
     private SpriteSheet SSpriteSheet;
     private SpriteSheet SAttackSpriteSheet;
     private SpriteSheet enemySpriteSheet;
-    private SpriteSheet itemSpriteSheet;
+    private SpriteSheet itemSpriteSheet; 
+    private SpriteSheet luigiSpriteSheet;
+    
     
 
     public Images() {
@@ -95,6 +109,10 @@ public class Images {
         marioSmallWalkRight = new BufferedImage[2];
         marioSmallJumpLeft = new BufferedImage[4];
         marioSmallJumpRight = new BufferedImage[4];
+       luigiSmallWalkLeft = new BufferedImage[2];
+       luigiSmallWalkRight = new BufferedImage[2];
+       luigiSmallJumpLeft = new BufferedImage[4];
+       luigiSmallJumpRight = new BufferedImage[4];
         item = new BufferedImage[19];
         enemy = new BufferedImage[9];
         hitWall = new BufferedImage[44];
@@ -110,6 +128,12 @@ public class Images {
         marioBigRunRight = new BufferedImage[2];
         marioBigJumpLeft = new BufferedImage[5];
         marioBigJumpRight = new BufferedImage[5];
+       luigiBigWalkLeft = new BufferedImage[2];
+       luigiBigWalkRight = new BufferedImage[2];
+       luigiBigRunLeft = new BufferedImage[2];
+       luigiBigRunRight = new BufferedImage[2];
+       luigiBigJumpLeft = new BufferedImage[5];
+       luigiBigJumpRight = new BufferedImage[5];
         goomba = new BufferedImage[2];
         pumpkin = new BufferedImage[4];
 
@@ -123,12 +147,14 @@ public class Images {
             backgroundSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/backgroundSheet.png")));
             interactableSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/interactablesSheet.png")));
             playerSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/marioSNESSheet.png")));
+            
             blockSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/blocksSheet.png")));
             goombaSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/goombaSprite.png")));
             SSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/Sheets.png")));
             SAttackSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet2.png")));
             enemySpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet.png")));
             itemSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/itemSprite.png")));
+            luigiSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/luigiSprite.png")));
 
 
             //Images
@@ -163,44 +189,77 @@ public class Images {
             //Small
             marioSmallWalkLeft[0] = playerSpriteSheet.crop(169,0,14,20);
             marioSmallWalkLeft[1] = playerSpriteSheet.crop(49,0,15,19);
+            luigiSmallWalkLeft[0] = luigiSpriteSheet.crop(198,0,19,22);
+            luigiSmallWalkLeft[1] = luigiSpriteSheet.crop(167,0,19,22);
 
             marioSmallWalkRight[0] = playerSpriteSheet.crop(209,0,14,20);
             marioSmallWalkRight[1] = playerSpriteSheet.crop(328,0,15,19);
+            luigiSmallWalkRight[0] = luigiSpriteSheet.crop(234,0,19,22);
+            luigiSmallWalkRight[1] = luigiSpriteSheet.crop(262,0,19,22);
 
             marioSmallJumpLeft[0] = playerSpriteSheet.crop(168,39,16,22);
             marioSmallJumpLeft[1] = playerSpriteSheet.crop(128,40,16,20);
             marioSmallJumpLeft[2] = playerSpriteSheet.crop(49,39,15,21);//up
             marioSmallJumpLeft[3] = playerSpriteSheet.crop(89,43,15,14);//down
+            luigiSmallJumpLeft[0] = luigiSpriteSheet.crop(112,0,17,23);
+            luigiSmallJumpLeft[1] = luigiSpriteSheet.crop(84,0,18,22);
+            luigiSmallJumpLeft[2] = luigiSpriteSheet.crop(84,28,18,25);//up
+            luigiSmallJumpLeft[3] = luigiSpriteSheet.crop(110,31,20,20);//down
+
 
             marioSmallJumpRight[0] = playerSpriteSheet.crop(208,39,16,22);
             marioSmallJumpRight[1] = playerSpriteSheet.crop(248,40,16,20);
             marioSmallJumpRight[2] = playerSpriteSheet.crop(328,39,15,21);//up
             marioSmallJumpRight[3] = playerSpriteSheet.crop(288,43,15,14);//down
+            luigiSmallJumpRight[0] = luigiSpriteSheet.crop(321,0,18,23);
+            luigiSmallJumpRight[1] = luigiSpriteSheet.crop(347,0,18,21);
+            luigiSmallJumpRight[2] = luigiSpriteSheet.crop(347,30,17,23);//up
+            luigiSmallJumpRight[3] = luigiSpriteSheet.crop(321,31,16,21);//down
 
             // Big
             marioBigWalkLeft[0] = playerSpriteSheet.crop(169,76,15,28);
             marioBigWalkLeft[1] = playerSpriteSheet.crop(8,76,16,28);
+            luigiBigWalkLeft[0] = luigiSpriteSheet.crop(198,114,17,34);
+            luigiBigWalkLeft[1] = luigiSpriteSheet.crop(167,116,17,32);
 
             marioBigWalkRight[0] = playerSpriteSheet.crop(208,76,15,28);
             marioBigWalkRight[1] = playerSpriteSheet.crop(368,76,16,28);
+            luigiBigWalkRight[0] =luigiSpriteSheet.crop(234,116,17,32);
+            luigiBigWalkRight[1] =luigiSpriteSheet.crop(264,115,18,33);
 
             marioBigRunLeft[0] = playerSpriteSheet.crop(169,76,15,28);
             marioBigRunLeft[1] = playerSpriteSheet.crop(48,76,16,27);
+            luigiBigRunLeft[0] = luigiSpriteSheet.crop(198,114,17,34);
+            luigiBigRunLeft[1] = luigiSpriteSheet.crop(138,115,19,31);
+            
 
             marioBigRunRight[0] = playerSpriteSheet.crop(208,76,15,28);
             marioBigRunRight[1] = playerSpriteSheet.crop(328,76,16,27);
+            luigiBigRunRight[0] = luigiSpriteSheet.crop(234,116,17,32);
+            luigiBigRunRight[1] = luigiSpriteSheet.crop(293,116,18,30);
 
             marioBigJumpLeft[0] = playerSpriteSheet.crop(168,114,16,31);
             marioBigJumpLeft[1] = playerSpriteSheet.crop(128,115,16,29);
             marioBigJumpLeft[2] = playerSpriteSheet.crop(129,196,15,27);//up
             marioBigJumpLeft[3] = playerSpriteSheet.crop(88,122,16,15);//down
             marioBigJumpLeft[4] = playerSpriteSheet.crop(8,115,16,29);//change
+            luigiBigJumpLeft[0] = luigiSpriteSheet.crop(109,115,20,32);
+            luigiBigJumpLeft[1] = luigiSpriteSheet.crop(52,117,20,29);
+            luigiBigJumpLeft[2] = luigiSpriteSheet.crop(85,155,17,31);//up
+            luigiBigJumpLeft[3] = luigiSpriteSheet.crop(110,159,19,24);//down
+            luigiBigJumpLeft[4] = luigiSpriteSheet.crop(53,154,18,34);//change
+            
 
             marioBigJumpRight[0] = playerSpriteSheet.crop(208,114,16,31);
             marioBigJumpRight[1] = playerSpriteSheet.crop(248,115,16,29);
             marioBigJumpRight[2] = playerSpriteSheet.crop(248,196,15,27);//up
             marioBigJumpRight[3] = playerSpriteSheet.crop(287,122,16,15);//down
             marioBigJumpRight[4] = playerSpriteSheet.crop(368,115,16,29);//Change
+            luigiBigJumpRight[0] = luigiSpriteSheet.crop(320,115,19,32);
+            luigiBigJumpRight[1] = luigiSpriteSheet.crop(377,115,20,31);
+            luigiBigJumpRight[2] = luigiSpriteSheet.crop(347,156,17,30);//up
+            luigiBigJumpRight[3] = luigiSpriteSheet.crop(320,160,18,23);//down
+            luigiBigJumpRight[4] = luigiSpriteSheet.crop(379,154,18,34);//change
             
             item[0] =  ImageIO.read(getClass().getResourceAsStream("/Sheets/item/SL1.png"));
             item[1] =  ImageIO.read(getClass().getResourceAsStream("/Sheets/item/SL2.png"));
