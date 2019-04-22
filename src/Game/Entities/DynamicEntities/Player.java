@@ -84,7 +84,7 @@ public class Player extends BaseDynamicEntity {
             	 gotStarCoin = true;
                  ((Item) entity).used = true;
                  System.out.println("Got Star Coin");
-                 //añadir codigo para el winstate
+                 State.setState(handler.getGame().winState);
             }
         }
     }
@@ -184,14 +184,16 @@ public class Player extends BaseDynamicEntity {
         Rectangle marioBoundsL = toLeft ? mario.getLeftBounds() : mario.getRightBounds();
         
         for(BaseDynamicEntity enemy : enemies){
-            Rectangle enemyBoundsR = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
-            Rectangle enemyBoundsL = !toLeft ? enemy.getLeftBounds() : enemy.getRightBounds();
-            
-            if (marioBoundsR.intersects(enemyBoundsR) || marioBoundsL.intersects(enemyBoundsL) ) {
-                marioDies = true;
-                State.setState(handler.getGame().gameOverState);
-                break;
-            }
+        	if(!(enemy instanceof Item)) {
+        		Rectangle enemyBoundsR = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
+        		Rectangle enemyBoundsL = !toLeft ? enemy.getLeftBounds() : enemy.getRightBounds();
+
+        		if (marioBoundsR.intersects(enemyBoundsR) || marioBoundsL.intersects(enemyBoundsL) ) {
+        			marioDies = true;
+        			State.setState(handler.getGame().gameOverState);
+        			break;
+        		}
+        	}
         }
         
         if(marioDies) {

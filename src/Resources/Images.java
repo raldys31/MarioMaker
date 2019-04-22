@@ -67,6 +67,7 @@ public class Images {
     public static BufferedImage Pause;
     public static BufferedImage Cursor;
     public static BufferedImage GameOver;
+    public static BufferedImage Win;
 
     public static BufferedImage testMap;
     public static BufferedImage testMaptwo;
@@ -165,6 +166,7 @@ public class Images {
             butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//hoverbut
             butstart[2]= ImageIO.read(getClass().getResourceAsStream("/Buttons/ClickedBut.png"));//clickbut
             GameOver = ImageIO.read(getClass().getResourceAsStream("/Sheets/gameOver.png"));
+            Win = ImageIO.read(getClass().getResourceAsStream("/Sheets/win.png"));
 
 
             backgrounds[0] = backgroundSpriteSheet.crop(2,2,512,432);
