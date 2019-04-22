@@ -26,6 +26,7 @@ import java.util.Random;
 /**
  * Created by AlexVR on 7/1/2018.
  */
+
 public class MenuState extends State {
 
 	public UIManager uiManager;
@@ -45,7 +46,7 @@ public class MenuState extends State {
 	public int GridPixelsize;
 	int colorSelected = MapBuilder.boundBlock;
 	Color[][] blocks;
-	//Input
+//Input
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
 	private boolean clicked = true;
@@ -55,7 +56,6 @@ public class MenuState extends State {
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUimanager(uiManager);
 		background = new Random().nextInt(9);
-
 		DisplayWidth=(handler.getWidth())+(handler.getWidth()/2);
 		DiplayHeight = handler.getHeight();
 		GridPixelsize = 20;
@@ -77,7 +77,7 @@ public class MenuState extends State {
 		}));
 	}
 
-	@Override
+@Override
 	public void tick() {
 		if(!creatingMap) {
 			handler.getMouseManager().setUimanager(uiManager);
@@ -87,6 +87,29 @@ public class MenuState extends State {
 				uiManager = new UIManager(handler);
 				handler.getMouseManager().setUimanager(uiManager);
 
+				//SINGLE PLAYER
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) - (64), 128, 64, "Single Player", () -> {
+					if(!handler.isInMap()) {
+						mode = "Single";
+					}
+				}, handler,Color.BLACK));
+				
+				//MULTIPLAYER
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "Multiplayer", () -> {
+					if(!handler.isInMap()) {
+						mode = "Multiplayer";
+					}
+				}, handler,Color.BLACK));
+
+				uiManager.addObjects(this.but);
+			}
+			
+			//If single player is selected
+			if(mode.equals("Single")) {
+				mode = "Selecting";
+				uiManager = new UIManager(handler);
+				handler.getMouseManager().setUimanager(uiManager);
+				
 				//New Map
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) - (64), 128, 64, "New Map", () -> {
 					if(!handler.isInMap()) {
@@ -136,6 +159,25 @@ public class MenuState extends State {
 				}, handler,Color.BLACK));
 				uiManager.addObjects(this.but);
 			}
+			
+			//If multiplayer is selected
+			if(mode.equals("Multiplayer")) {
+				mode = "Selecting";
+				uiManager = new UIManager(handler);
+				handler.getMouseManager().setUimanager(uiManager);
+				
+				//Test map, change later to Hello World map
+				//testMap1
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "Map 1", () -> {
+					if(!handler.isInMap()) {
+						mode = "Menu";
+						handler.setMap(MapBuilder.createMap(Images.testMap, handler));
+						State.setState(handler.getGame().gameState);
+					}
+				}, handler,Color.BLACK));
+				uiManager.addObjects(this.but);
+			}
+			
 			if (mode.equals("Selecting") && handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE) && (!handler.isInMap())) {
 				mode = "Menu";
 				uiManager = new UIManager(handler);
