@@ -2,6 +2,7 @@ package Main;
 
 import Display.DisplayScreen;
 import Display.UI.UIPointer;
+import Game.Entities.DynamicEntities.Luigi;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Player;
 import Game.Entities.StaticEntities.BreakBlock;
@@ -28,15 +29,19 @@ import java.awt.image.BufferStrategy;
  */
 
 public class GameSetUp implements Runnable {
-    public DisplayScreen display;
+    public DisplayScreen displayM;
+    public DisplayScreen displayL;
     public String title;
 
     private boolean running = false;
     private Thread thread;
     public static boolean threadB;
+    private boolean displayLuigiScreen = false;
 
     private BufferStrategy bs;
     private Graphics g;
+    private BufferStrategy bsL;
+    private Graphics gL;
     public UIPointer pointer;
 
     //Input
@@ -67,16 +72,26 @@ public class GameSetUp implements Runnable {
         initialmouseManager = mouseManager;
         musicHandler = new MusicHandler(handler);
         handler.setCamera(new Camera());
+        handler.setCameraL(new Camera());
     }
 
     private void init(){
-        display = new DisplayScreen(title, handler.width, handler.height);
-        display.getFrame().addKeyListener(keyManager);
-        display.getFrame().addMouseListener(mouseManager);
-        display.getFrame().addMouseMotionListener(mouseManager);
-        display.getCanvas().addMouseListener(mouseManager);
-        display.getCanvas().addMouseMotionListener(mouseManager);
+        displayM = new DisplayScreen(title, handler.width, handler.height);
+        displayM.getFrame().addKeyListener(keyManager);
+        displayM.getFrame().addMouseListener(mouseManager);
+        displayM.getFrame().addMouseMotionListener(mouseManager);
+        displayM.getCanvas().addMouseListener(mouseManager);
+        displayM.getCanvas().addMouseMotionListener(mouseManager);
 
+        //Multiplayer window
+        displayL = new DisplayScreen(title, handler.width, handler.height);
+        displayL.getFrame().addKeyListener(keyManager);
+        displayL.getFrame().addMouseMotionListener(mouseManager);
+        displayL.getCanvas().addMouseListener(mouseManager);
+        displayL.getCanvas().addMouseMotionListener(mouseManager);
+        displayL.getFrame().setVisible(false);
+        
+      
         Images img = new Images();
 
         musicHandler.restartBackground();
@@ -144,17 +159,36 @@ public class GameSetUp implements Runnable {
         //checks for key types and manages them
         keyManager.tick();
 
+        //Set location of frames when multiplayer is selected
+        if (handler.isMultiplayerMode() == true && !displayLuigiScreen && handler.isInMap()) {
+        	displayM.getFrame().setLocation(displayM.getFrame().getX() - displayM.getFrame().getWidth()/2,
+        			displayM.getFrame().getY());
+        	displayL.getFrame().setLocation(displayM.getFrame().getX() + displayM.getFrame().getWidth(),
+        			displayM.getFrame().getY());
+        	displayL.getFrame().setVisible(true);
+        	displayLuigiScreen = true;
+        }
+        else if (!handler.isMultiplayerMode() && displayLuigiScreen) {
+        	displayL.getFrame().setVisible(false);
+        	displayM.getFrame().setLocation(displayM.getFrame().getX() + displayM.getFrame().getWidth(),
+        			displayM.getFrame().getY());
+        	displayLuigiScreen = false;
+        }
+        
         if(musicHandler.ended()){
             musicHandler.restartBackground();
         }
 
         //game states are the menus
         if(State.getState() != null)
-            State.getState().tick();
+        	State.getState().tick();
         if (handler.isInMap()) {
-            updateCamera();
+        	updateCamera();
+        
+        	if (handler.isMultiplayerMode() == true && displayLuigiScreen) {
+        		updateCameraL();
+        	}
         }
-
     }
 
     private void updateCamera() {
@@ -178,28 +212,65 @@ public class GameSetUp implements Runnable {
         }
         handler.getCamera().moveCam(shiftAmount,shiftAmountY);
     }
+    
+    private void updateCameraL() {
+        Player luigi = handler.getLuigi();
+        double luigiVelocityX = luigi.getVelX();
+        double luigiVelocityY = luigi.getVelY();
+        double shiftAmount = 0;
+        double shiftAmountY = 0;
+
+        if (luigiVelocityX > 0 && luigi.getX() - 2*(handler.getWidth()/3) > handler.getCameraL().getX()) {
+            shiftAmount = luigiVelocityX;
+        }
+        if (luigiVelocityX < 0 && luigi.getX() +  2*(handler.getWidth()/3) < handler.getCameraL().getX()+handler.width) {
+            shiftAmount = luigiVelocityX;
+        }
+        if (luigiVelocityY > 0 && luigi.getY() - 2*(handler.getHeight()/3) > handler.getCameraL().getY()) {
+            shiftAmountY = luigiVelocityY;
+        }
+        if (luigiVelocityX < 0 && luigi.getY() +  2*(handler.getHeight()/3) < handler.getCameraL().getY()+handler.height) {
+            shiftAmountY = -luigiVelocityY;
+        }
+        handler.getCameraL().moveCam(shiftAmount,shiftAmountY);
+    }
 
     private void render(){
-        bs = display.getCanvas().getBufferStrategy();
+        bs = displayM.getCanvas().getBufferStrategy();
+        bsL = displayL.getCanvas().getBufferStrategy();
 
         if(bs == null){
-            display.getCanvas().createBufferStrategy(3);
+            displayM.getCanvas().createBufferStrategy(3);
+            return;
+        }
+        if(bsL == null){
+            displayL.getCanvas().createBufferStrategy(3);
             return;
         }
         g = bs.getDrawGraphics();
         //Clear Screen
         g.clearRect(0, 0,  handler.width, handler.height);
+        
+        gL = bsL.getDrawGraphics();
+        //Clear Screen
+        gL.clearRect(0, 0,  handler.width, handler.height);
 
         //Draw Here!
         Graphics2D g2 = (Graphics2D) g.create();
+        Graphics2D g2L = (Graphics2D) gL.create();
 
-        if(State.getState() != null)
-            State.getState().render(g);
+        if(State.getState() != null) {
+        	State.getState().render(g2);
+            State.getState().render(g2L);
+        }
 
         //End Drawing!
         bs.show();
         g.dispose();
+        bsL.show();
+        gL.dispose();
     }
+    
     public Map getMap() {
     	Map map = new Map(this.handler);
     	Images.makeMap(0, MapBuilder.pixelMultiplier, 31, 200, map, this.handler);
@@ -212,6 +283,7 @@ public class GameSetUp implements Runnable {
         map.addEnemy(pointer);
         threadB=true;
     	return map;
+
     }
 
     public synchronized void stop(){
@@ -225,7 +297,15 @@ public class GameSetUp implements Runnable {
         }
     }
 
-    public KeyManager getKeyManager(){
+    public Graphics getgL() {
+		return gL;
+	}
+
+	public void setgL(Graphics gL) {
+		this.gL = gL;
+	}
+
+	public KeyManager getKeyManager(){
         return keyManager;
     }
 

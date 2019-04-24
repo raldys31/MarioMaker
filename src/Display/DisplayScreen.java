@@ -57,6 +57,7 @@ public class DisplayScreen {
         frame.pack();
     }
 
+
     public Canvas getCanvas(){
         return canvas;
     }

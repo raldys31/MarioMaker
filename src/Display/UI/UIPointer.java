@@ -240,7 +240,7 @@ public class UIPointer extends BaseDynamicEntity {
             health = 3;
             this.handler.getGame().getMusicHandler().play("finished");
             handler.setIsInMap(false);
-            JOptionPane.showMessageDialog(handler.getGame().display.getCanvas(),GD);
+            JOptionPane.showMessageDialog(handler.getGame().displayM.getCanvas(),GD);
             State.setState(handler.getGame().menuState);
         }
     }

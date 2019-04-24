@@ -109,6 +109,7 @@ public class MenuState extends State {
 				mode = "Selecting";
 				uiManager = new UIManager(handler);
 				handler.getMouseManager().setUimanager(uiManager);
+				handler.setSingleplayerMode(true);
 				
 				//New Map
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) - (64), 128, 64, "New Map", () -> {
@@ -165,13 +166,23 @@ public class MenuState extends State {
 				mode = "Selecting";
 				uiManager = new UIManager(handler);
 				handler.getMouseManager().setUimanager(uiManager);
+				handler.setMultiplayerMode(true);
+				System.out.println("Multiplayer Mode Selected");
+				
+				//New Map
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) - (64), 128, 64, "New Map", () -> {
+					if(!handler.isInMap()) {
+						mode = "Menu";
+						initNew("New Map Creator", handler);
+					}
+				}, handler,Color.BLACK));
 				
 				//Test map, change later to Hello World map
 				//testMap1
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "Map 1", () -> {
 					if(!handler.isInMap()) {
 						mode = "Menu";
-						handler.setMap(MapBuilder.createMap(Images.testMap, handler));
+						handler.setMap(MapBuilder.createMap(Images.helloWorld, handler));
 						State.setState(handler.getGame().gameState);
 					}
 				}, handler,Color.BLACK));

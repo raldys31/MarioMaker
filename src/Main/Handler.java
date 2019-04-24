@@ -1,5 +1,6 @@
 package Main;
 
+import Game.Entities.DynamicEntities.Luigi;
 import Game.Entities.DynamicEntities.Mario;
 import Game.World.Map;
 import Input.Camera;
@@ -23,10 +24,17 @@ public class Handler {
 
     private GameSetUp game;
     private Mario mario;
+    private Luigi luigi;
     private Map map;
     private boolean marioInMap =false;
+    private boolean luigiInMap =false;
+    private boolean singleplayerMode = false;
+    private boolean multiplayerMode = false;
+    private boolean displayLuigiScreen = false;
+    
 
     private Camera camera;
+    private Camera cameraL;
 
 
     public Handler(){
@@ -69,6 +77,14 @@ public class Handler {
     public void setMario(Mario mario) {
         this.mario = mario;
     }
+    
+    public Luigi getLuigi() {
+        return luigi;
+    }
+
+    public void setLuigi(Luigi luigi) {
+        this.luigi = luigi;
+    }
 
     public Map getMap() {
         return map;
@@ -85,6 +101,14 @@ public class Handler {
     public void setIsInMap(boolean is) {
         marioInMap = is;
     }
+    
+    public boolean isInMapL() {
+        return luigiInMap;
+    }
+
+    public void setIsInMapL(boolean is) {
+        luigiInMap = is;
+    }
 
     public Camera getCamera() {
         return camera;
@@ -93,4 +117,29 @@ public class Handler {
     public void setCamera(Camera camera) {
         this.camera = camera;
     }
+    
+    public Camera getCameraL() {
+        return cameraL;
+    }
+
+    public void setCameraL(Camera cameraL) {
+        this.cameraL = cameraL;
+    }
+
+	public boolean isSingleplayerMode() {
+		return singleplayerMode;
+	}
+
+	public void setSingleplayerMode(boolean singleplayerMode) {
+		this.singleplayerMode = singleplayerMode;
+	}
+
+	public boolean isMultiplayerMode() {
+		return multiplayerMode;
+	}
+
+	public void setMultiplayerMode(boolean multiplayerMode) {
+		this.multiplayerMode = multiplayerMode;
+	}
+
 }

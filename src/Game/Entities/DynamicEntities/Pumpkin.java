@@ -17,13 +17,28 @@ public class Pumpkin extends BaseDynamicEntity {
 
     @Override
     public void tick(){
-    	super.tick();
-    	anim.tick();
-    }
-
+    	 if(!ded && dedCounter==0) {
+             super.tick();
+             anim.tick();
+             if (falling) {
+                 y = (int) (y + velY);
+                 velY = velY + gravityAcc;
+                 checkFalling();
+             }
+         }else if(ded&&dedCounter==0){
+             y++;
+             height--;
+             setDimension(new Dimension(width,height));
+             if (height==0){
+                 dedCounter=1;
+                 y=-10000;
+             }
+         }
+     }
 
     @Override
     public void kill() {
+    	sprite = Images.pumpkinDies;
         ded=true;
     }
 }
