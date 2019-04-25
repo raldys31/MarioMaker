@@ -7,6 +7,8 @@ import Resources.Images;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+import Game.GameStates.State;
+
 public class Mario extends Player{
 
 	private boolean hit = false;
@@ -29,6 +31,7 @@ public class Mario extends Player{
 
 	@Override
 	public void tick(){
+		gotStar();
 	    if(!grabbed) {
             super.tick();
             if (!this.hit) {
@@ -202,6 +205,13 @@ public class Mario extends Player{
 		}
 	}
 	
+	public void gotStar() {
+		if(handler.getMario().gotStarCoin) {
+			System.out.println("Mario got star");
+			State.setState(handler.getGame().winStateMario);
+		}
+	}
+
 	public boolean getHit() {
 		return this.hit;
 	}

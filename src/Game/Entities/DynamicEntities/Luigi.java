@@ -7,6 +7,8 @@ import Resources.Images;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+import Game.GameStates.State;
+
 public class Luigi extends Player{
 
 	private boolean hit = false;
@@ -32,6 +34,7 @@ public class Luigi extends Player{
 	
 	@Override
 	public void tick(){
+		gotStar();
 	    if(!grabbed) {
             super.tick();
             if (!this.hit) {
@@ -199,6 +202,14 @@ public class Luigi extends Player{
 			this.setY(this.getY() - 80);
 		}
 	}
+	
+	public void gotStar() {
+		if(handler.getLuigi().gotStarCoin) {
+			System.out.println("Luigi got star");
+			State.setState(handler.getGame().winStateLuigi);
+		}
+	}
+
 	
 	public boolean getHit() {
 		return this.hit;

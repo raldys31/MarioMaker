@@ -82,9 +82,7 @@ public class Player extends BaseDynamicEntity {
             }
             else if (entity != null && getBounds().intersects(entity.getBounds()) && entity instanceof StarCoin && !gotStarCoin) {
             	 gotStarCoin = true;
-                 ((Item) entity).used = true;
-                 System.out.println("Got Star Coin");
-                 State.setState(handler.getGame().winState);
+                 ((Item) entity).used = true;                
             }
         }
     }

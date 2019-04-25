@@ -8,10 +8,11 @@ import Game.Entities.DynamicEntities.Player;
 import Game.Entities.StaticEntities.BreakBlock;
 import Game.GameStates.GameOverState;
 import Game.GameStates.GameState;
+import Game.GameStates.LuigiWinState;
+import Game.GameStates.MarioWinState;
 import Game.GameStates.MenuState;
 import Game.GameStates.PauseState;
 import Game.GameStates.State;
-import Game.GameStates.WinState;
 import Game.World.Map;
 import Game.World.MapBuilder;
 import Input.Camera;
@@ -57,7 +58,9 @@ public class GameSetUp implements Runnable {
     public State menuState;
     public State pauseState;
     public State gameOverState;
-    public State winState;
+    public State winStateMario;
+    public State winStateLuigi;
+
 
     //Res.music
     private MusicHandler musicHandler;
@@ -100,7 +103,8 @@ public class GameSetUp implements Runnable {
         menuState = new MenuState(handler);
         pauseState = new PauseState(handler);
         gameOverState = new GameOverState(handler);
-        winState = new WinState(handler);
+        winStateMario = new MarioWinState(handler);
+        winStateLuigi = new LuigiWinState(handler);
         
         State.setState(menuState);
     }
