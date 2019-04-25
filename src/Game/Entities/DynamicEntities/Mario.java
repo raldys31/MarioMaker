@@ -49,6 +49,9 @@ public class Mario extends Player{
                     }
                     facing = "Right";
                     moving = true;
+                    if (handler.isMultiplayerMode()) {
+                    	teleport();
+                    }
                 } else if (handler.getKeyManager().left && !handler.getKeyManager().up && !handler.getKeyManager().down) {
                     if (handler.getKeyManager().runbutt) {
                         velX = -6;
@@ -62,6 +65,9 @@ public class Mario extends Player{
                     }
                     facing = "Left";
                     moving = true;
+                    if (handler.isMultiplayerMode() ) {
+                    	teleport();
+                    }
                 } else {
                     velX = 0;
                     moving = false;
@@ -187,6 +193,15 @@ public class Mario extends Player{
 			}
 		}
 	}
+	public void teleport() {
+		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_F) && facing.equals("Right")) {
+			this.setX(this.getX() + 80);
+		}
+		else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_F) && facing.equals("Left")) {
+			this.setX(this.getX() - 80);
+		}
+	}
+	
 	public boolean getHit() {
 		return this.hit;
 	}

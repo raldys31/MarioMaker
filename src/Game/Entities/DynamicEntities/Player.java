@@ -212,9 +212,11 @@ public class Player extends BaseDynamicEntity {
 
         for (BaseStaticEntity brick : bricks) {
             Rectangle brickTopBounds = brick.getTopBounds();
-            if (marioBounds.intersects(brickTopBounds) && brick instanceof BoundBlock || brick instanceof TileBlock) {
+            if (marioBounds.intersects(brickTopBounds) && brick instanceof BoundBlock) {
             	marioDies = true;
+            	if (handler.isSingleplayerMode()) {
                 State.setState(handler.getGame().gameOverState);
+            	}
                 break;
             }
         }

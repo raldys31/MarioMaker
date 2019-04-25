@@ -24,9 +24,12 @@ public class Luigi extends Player{
 			this.y-=8;
 			this.height+=8;
 			setDimension(new Dimension(width, this.height));
+			
 		}
 	}
 
+	
+	
 	@Override
 	public void tick(){
 	    if(!grabbed) {
@@ -72,6 +75,9 @@ public class Luigi extends Player{
                 } else if (jumping) {
                     velY = velY - gravityAcc;
                     y = (int) (y - velY);
+                    if (handler.isMultiplayerMode()) {
+                    	doubleJump();
+                    }
                 }
 
                 if (falling) {
@@ -187,6 +193,13 @@ public class Luigi extends Player{
 			}
 		}
 	}
+	
+	public void doubleJump() {
+		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_L)) {
+			this.setY(this.getY() - 80);
+		}
+	}
+	
 	public boolean getHit() {
 		return this.hit;
 	}

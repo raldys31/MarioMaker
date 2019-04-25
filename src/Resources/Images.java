@@ -368,9 +368,9 @@ public class Images {
             enemyBL= SAttackSpriteSheet.crop(188,184,41,55);
 
             //maps
-            testMap = ImageIO.read(getClass().getResourceAsStream("/maps/testmap1.png"));
-            testMaptwo = ImageIO.read(getClass().getResourceAsStream("/maps/testmap2.png"));
-            helloWorld = ImageIO.read(getClass().getResourceAsStream("/maps/Mario Heaven.png"));
+            testMap = ImageIO.read(getClass().getResourceAsStream("/maps/Map 1.png"));
+            testMaptwo = ImageIO.read(getClass().getResourceAsStream("/maps/Map 2.png"));
+            helloWorld = ImageIO.read(getClass().getResourceAsStream("/maps/Hello World.png"));
 
             //blocks
             boundBlock = interactableSpriteSheet.crop(12,73,16,16);

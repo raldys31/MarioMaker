@@ -46,7 +46,7 @@ public class MenuState extends State {
 	public int GridPixelsize;
 	int colorSelected = MapBuilder.boundBlock;
 	Color[][] blocks;
-//Input
+	//Input
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
 	private boolean clicked = true;
@@ -67,9 +67,9 @@ public class MenuState extends State {
 		for (int i:str) { str2+=(char)i;}
 		this.but = new UIAnimationButton(handler.getWidth() - (handler.getWidth()/ 8),(handler.getHeight()/0b1100),32, 32 , Images.item, () -> {
 			if(but.getdraw() && !handler.isInMap()) {handler.setMap(handler.getGame().getMap());
-				handler.getGame().getMusicHandler().pauseBackground();
-				handler.getGame().getMusicHandler().play("Megalovania");
-				State.setState(handler.getGame().gameState);}}, this.handler);
+			handler.getGame().getMusicHandler().pauseBackground();
+			handler.getGame().getMusicHandler().play("Megalovania");
+			State.setState(handler.getGame().gameState);}}, this.handler);
 		uiManager.addObjects(new UIImageButton(handler.getWidth()/2-64, handler.getHeight()/2+(handler.getHeight()/8), 128, 64, Images.butstart, () -> {
 			if(!handler.isInMap()) {
 				mode = "Select";
@@ -77,7 +77,7 @@ public class MenuState extends State {
 		}));
 	}
 
-@Override
+	@Override
 	public void tick() {
 		if(!creatingMap) {
 			handler.getMouseManager().setUimanager(uiManager);
@@ -93,7 +93,7 @@ public class MenuState extends State {
 						mode = "Single";
 					}
 				}, handler,Color.BLACK));
-				
+
 				//MULTIPLAYER
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "Multiplayer", () -> {
 					if(!handler.isInMap()) {
@@ -103,14 +103,14 @@ public class MenuState extends State {
 
 				uiManager.addObjects(this.but);
 			}
-			
+
 			//If single player is selected
 			if(mode.equals("Single")) {
 				mode = "Selecting";
 				uiManager = new UIManager(handler);
 				handler.getMouseManager().setUimanager(uiManager);
 				handler.setSingleplayerMode(true);
-				
+
 				//New Map
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) - (64), 128, 64, "New Map", () -> {
 					if(!handler.isInMap()) {
@@ -160,7 +160,7 @@ public class MenuState extends State {
 				}, handler,Color.BLACK));
 				uiManager.addObjects(this.but);
 			}
-			
+
 			//If multiplayer is selected
 			if(mode.equals("Multiplayer")) {
 				mode = "Selecting";
@@ -168,7 +168,7 @@ public class MenuState extends State {
 				handler.getMouseManager().setUimanager(uiManager);
 				handler.setMultiplayerMode(true);
 				System.out.println("Multiplayer Mode Selected");
-				
+
 				//New Map
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) - (64), 128, 64, "New Map", () -> {
 					if(!handler.isInMap()) {
@@ -176,19 +176,21 @@ public class MenuState extends State {
 						initNew("New Map Creator", handler);
 					}
 				}, handler,Color.BLACK));
-				
+
 				//Test map, change later to Hello World map
 				//testMap1
-				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "Map 1", () -> {
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "Hello World", () -> {
 					if(!handler.isInMap()) {
 						mode = "Menu";
 						handler.setMap(MapBuilder.createMap(Images.helloWorld, handler));
+						JOptionPane.showMessageDialog(null, "The first player that get the star wins.\n" + "\n" + "For Mario Teleport: Press F\n" + "For Luigi Double Jump: Press Control", "Win Condition", 
+								JOptionPane.INFORMATION_MESSAGE, null);
 						State.setState(handler.getGame().gameState);
 					}
 				}, handler,Color.BLACK));
 				uiManager.addObjects(this.but);
 			}
-			
+
 			if (mode.equals("Selecting") && handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE) && (!handler.isInMap())) {
 				mode = "Menu";
 				uiManager = new UIManager(handler);
@@ -303,7 +305,7 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.luigi;
 		}
-		
+
 
 		if(mouseManager.isLeftPressed() && !clicked){
 			int posX =mouseManager.getMouseX()/GridPixelsize;
