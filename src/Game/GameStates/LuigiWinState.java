@@ -20,7 +20,7 @@ public class LuigiWinState extends State {
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUimanager(uiManager);
 
-        uiManager.addObjects(new UIStringButton(50, 160, 128, 64, "Restart", () -> {
+        uiManager.addObjects(new UIStringButton(50, 200, 128, 64, "Restart", () -> {
             handler.getMouseManager().setUimanager(null);
             handler.setIsInMap(false);
             State.setState(handler.getGame().menuState);
