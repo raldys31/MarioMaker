@@ -183,7 +183,7 @@ public class MenuState extends State {
 					if(!handler.isInMap()) {
 						mode = "Menu";
 						handler.setMap(MapBuilder.createMap(Images.helloWorld, handler));
-						JOptionPane.showMessageDialog(null, "The first player that get the star wins.\n" + "\n" + "For Mario Teleport: Press F\n" + "For Luigi Double Jump: Press Control", "Win Condition", 
+						JOptionPane.showMessageDialog(null, "The first player that get the star wins.\n" + "\n" + "For Mario Teleport: Press F\n" + "For Luigi Double Jump: Press Control and then L", "Win Condition", 
 								JOptionPane.INFORMATION_MESSAGE, null);
 						State.setState(handler.getGame().gameState);
 					}
